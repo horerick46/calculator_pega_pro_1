@@ -21,23 +21,22 @@ function load() {
           // Last char of string
           var lastChar = input[input.length - 1];
 
-          // Replace x to *, + to / which could be calculated in eval
+          // Replace x to *, ÷ to / which could be calculated in eval
           input = input.replace(/x/g, "*").replace(/÷/g, "/");
 
           // Checking the last character of the input.
           // If it's an operator or a decimal, remove it
-          // /.$/ means last char in regex
           if (operators.indexOf(lastChar) > -1 || lastChar == ".")
             input = input.replace(/.$/, "");
-          console.log("Hello", input);
 
-          if (input) {
+          if (input.includes("/0")) {
+            // Check for divide by zero
+            inputScreen.innerHTML = "Cannot divide by 0";
+          } else if (input) {
             // If the argument is an expression, eval() evaluates the expression.
-            // If the argument is one or more JavaScript statements, eval() executes the statements.
             inputScreen.innerHTML = eval(input);
           }
-          if (input[input.length - 2] == 0 && input.indexOf("/"))
-            inputScreen.innerHTML = "Cannot divide by 0";
+
           decimalAdded = false;
           break;
         case ".":
@@ -60,17 +59,14 @@ function load() {
           else if (input == "" && btnValue == "-")
             inputScreen.innerHTML += btnValue;
 
-          // Allows to represent the last operation
+          // Allows to replace the last operation
           if (operators.indexOf(lastChar) > -1 && input.length > 1) {
             inputScreen.innerHTML = input.replace(/.$/, btnValue);
           }
           decimalAdded = false;
           break;
         default:
-          console.log(inputScreen);
-          console.log(inputScreen.innerHTML);
           inputScreen.innerHTML += btnValue;
-          console.log(inputScreen.innerHTML);
           decimalAdded = false;
           break;
       }
