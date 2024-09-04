@@ -1,7 +1,3 @@
-/**
- * Created by chuandong on 15/11/27.
- */
-
 function load() {
   var btns = document.querySelectorAll("#calculator span");
   var operators = ["+", "-", "x", "÷"];
@@ -12,7 +8,7 @@ function load() {
   for (var i = 0; i < btns.length; i++) {
     var decimalAdded = false; // Flag used to avoid two decimal
 
-    btns[i].addEventListener("click", function() {
+    btns[i].addEventListener("click", function () {
       btnValue = this.innerHTML;
       input = inputScreen.innerHTML;
 
@@ -33,12 +29,15 @@ function load() {
           // /.$/ means last char in regex
           if (operators.indexOf(lastChar) > -1 || lastChar == ".")
             input = input.replace(/.$/, "");
+          console.log("Hello", input);
 
           if (input) {
             // If the argument is an expression, eval() evaluates the expression.
             // If the argument is one or more JavaScript statements, eval() executes the statements.
             inputScreen.innerHTML = eval(input);
           }
+          if (input[input.length - 2] == 0 && input.indexOf("/"))
+            inputScreen.innerHTML = "Cannot divide by 0";
           decimalAdded = false;
           break;
         case ".":
@@ -68,7 +67,10 @@ function load() {
           decimalAdded = false;
           break;
         default:
+          console.log(inputScreen);
+          console.log(inputScreen.innerHTML);
           inputScreen.innerHTML += btnValue;
+          console.log(inputScreen.innerHTML);
           decimalAdded = false;
           break;
       }
