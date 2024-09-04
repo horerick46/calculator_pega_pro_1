@@ -8,5 +8,5 @@
   <li>Abhishek Kumar Verma</li>
   <li>Aayush Dutta</li>
   <li>Rick Hore</li>
-  <li>Urooz Ahmad</li>
+  <li>Urooj Ahmad</li>
 </ul>
